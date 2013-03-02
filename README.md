@@ -1,5 +1,7 @@
 # Initscript exporter for foreman
 
+*Updated for CentOS Based Linux, including Amazon Linux*
+
 ### Using in your application
 
 ```ruby
