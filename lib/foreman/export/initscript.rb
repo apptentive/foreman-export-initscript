@@ -19,7 +19,7 @@ class Foreman::Export::Initscript < Foreman::Export::Base
     name_without_first = name.split("/")[1..-1].join("/")
     matchers = []
     matchers << File.join(options[:template], name_without_first) if options[:template]
-    matchers << File.expand_path("~/.foreman/templates/#{name}")
+    matchers << File.expand_path("~/.foreman/templates/#{name}") if ENV['HOME']
     matchers << File.expand_path("../../../../data/export/#{name}", __FILE__)
     path = File.read(matchers.detect { |m| File.exists?(m) })
     compiled = ERB.new(path).result(binding)
@@ -27,7 +27,7 @@ class Foreman::Export::Initscript < Foreman::Export::Base
     FileUtils.chmod(755, "#{app}")
 #    path = export_template name
 #    write_template "initscript/master.erb", "#{app}", binding
-   end
+  end
 
 end
 
